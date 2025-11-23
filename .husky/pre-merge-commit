@@ -1,9 +1,5 @@
-# Run full linting
+# Pre-merge checks (CI will also run, but this provides fast local feedback)
 npm run lint
-
-# Run type checking
 npm run type-check
-
-# Run all tests
 npm test
 

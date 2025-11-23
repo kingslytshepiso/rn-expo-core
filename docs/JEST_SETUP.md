@@ -67,6 +67,7 @@ module.exports = {
 ✅ **All tests passing!**
 
 The project uses Expo's recommended minimal configuration:
+
 - `preset: "jest-expo"` in `package.json`
 - No custom Jest config files needed
 - Expo handles all setup automatically
@@ -115,10 +116,10 @@ describe("Feature", () => {
   it("should do something", () => {
     // Arrange
     const input = "test";
-    
+
     // Act
     const result = functionToTest(input);
-    
+
     // Assert
     expect(result).toBe("expected");
   });
@@ -145,4 +146,3 @@ jest.mock("react-native-paper", () => ({
 - [Expo Unit Testing Documentation](https://docs.expo.dev/develop/unit-testing/)
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
 - [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
-

@@ -1,6 +1,7 @@
 # Project Structure
 
 This project is organized to serve two purposes:
+
 1. **Publishable Package**: The `src/` directory contains the reusable package code
 2. **Demo/Test App**: The root-level files (`App.tsx`, `screens/`) provide a demo app to test components
 
@@ -62,7 +63,12 @@ import { ResponsiveCard, useLayout } from "../src";
 When the package is published, users will import like this:
 
 ```typescript
-import { ThemeProvider, LayoutTracker, ResponsiveCard, useLayout } from "rn-expo-core";
+import {
+  ThemeProvider,
+  LayoutTracker,
+  ResponsiveCard,
+  useLayout,
+} from "rn-expo-core";
 ```
 
 ## Package Publishing
@@ -72,14 +78,15 @@ The `package.json` `files` field ensures only the package code is published:
 ```json
 {
   "files": [
-    "src",           // Package source code
-    "README.md",     // Documentation
-    "CHANGELOG.md"   // Version history
+    "src", // Package source code
+    "README.md", // Documentation
+    "CHANGELOG.md" // Version history
   ]
 }
 ```
 
 **Excluded from package**:
+
 - Demo app files (`App.tsx`, `screens/`, `index.ts`)
 - Configuration files (`babel.config.js`, `tsconfig.json`, etc.)
 - Test files (though they're in `src/`, they won't be imported by users)

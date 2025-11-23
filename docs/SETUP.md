@@ -11,11 +11,11 @@
 1. **Install Dependencies**
 
    Since the initial npm install may have network issues, try:
-   
+
    ```bash
    npm install
    ```
-   
+
    If you encounter network errors, you can try:
    - Using a different network
    - Clearing npm cache: `npm cache clean --force`
@@ -36,6 +36,7 @@
 3. **Verify Installation**
 
    Check that all dependencies are installed:
+
    ```bash
    npm list --depth=0
    ```
@@ -49,7 +50,6 @@
    ```
 
 2. **Run on Specific Platform**
-
    - Android: `npm run android`
    - iOS: `npm run ios`
    - Web: `npm run web`
@@ -81,6 +81,7 @@ core/
 ### Network Issues During Installation
 
 If you encounter network errors:
+
 1. Check your internet connection
 2. Try using a VPN if behind a corporate firewall
 3. Clear npm cache: `npm cache clean --force`
@@ -89,6 +90,7 @@ If you encounter network errors:
 ### TypeScript Errors
 
 If you see TypeScript errors about missing types:
+
 1. Ensure `@types/jest` is installed
 2. Run `npm run type-check` to see all type errors
 3. Make sure `tsconfig.json` includes the test types
@@ -96,6 +98,7 @@ If you see TypeScript errors about missing types:
 ### Module Not Found Errors
 
 If you see "Cannot find module" errors:
+
 1. Ensure all dependencies are installed: `npm install`
 2. Clear Metro bundler cache: `npm start -- --reset-cache`
 3. Delete `node_modules` and reinstall
@@ -103,9 +106,8 @@ If you see "Cannot find module" errors:
 ## Next Steps
 
 After installation:
+
 1. Review the `README.md` for usage examples
 2. Check `CHANGELOG.md` for recent updates
 3. Explore the example screen at `screens/ExamplesScreen.tsx`
 4. Run the app to see the component examples
-
-

@@ -9,7 +9,7 @@
 ✅ Type checking passing  
 ✅ Linting passing  
 ✅ Package structure verified  
-✅ Documentation created  
+✅ Documentation created
 
 ## Publish Commands
 
@@ -71,6 +71,7 @@ import { ThemeProvider, LayoutTracker, useLayout, useTheme } from "rn-expo-core"
 ## Package Contents
 
 The published package includes:
+
 - ✅ `src/` - All package source code
 - ✅ `README.md` - Documentation
 - ✅ `CHANGELOG.md` - Version history
@@ -85,4 +86,3 @@ The published package includes:
 2. **Test**: Install in a test project to verify
 3. **Document**: Share the usage guide with your team
 4. **Update**: Use `npm version patch|minor|major` for future releases
-

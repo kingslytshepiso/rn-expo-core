@@ -59,4 +59,3 @@ export const ResponsiveText: React.FC<ResponsiveTextProps> = ({
     </Text>
   );
 };
-

@@ -32,4 +32,3 @@ describe("Responsive Utilities", () => {
     });
   });
 });
-

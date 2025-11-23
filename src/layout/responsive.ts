@@ -10,7 +10,7 @@ export type ResponsiveValue<T> = T | Partial<Record<Breakpoint, T>>;
  */
 export const getResponsiveValue = <T>(
   value: ResponsiveValue<T>,
-  width: number
+  width: number,
 ): T => {
   if (typeof value !== "object" || value === null) {
     return value as T;

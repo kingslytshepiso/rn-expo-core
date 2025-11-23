@@ -21,4 +21,3 @@ describe("Spacing", () => {
     expect(spacing[64]).toBe(256);
   });
 });
-

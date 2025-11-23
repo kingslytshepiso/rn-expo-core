@@ -5,7 +5,7 @@ import { lightTheme, darkTheme, AppTheme } from "./themeConfig";
 
 interface ThemeProviderProps {
   children: React.ReactNode;
-  theme?: 'light' | 'dark' | 'auto';
+  theme?: "light" | "dark" | "auto";
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
@@ -20,10 +20,5 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     return systemColorScheme === "dark" ? darkTheme : lightTheme;
   };
 
-  return (
-    <PaperProvider theme={getTheme()}>
-      {children}
-    </PaperProvider>
-  );
+  return <PaperProvider theme={getTheme()}>{children}</PaperProvider>;
 };
-

@@ -102,6 +102,7 @@ npm version major
 ```
 
 These commands will:
+
 - Update `package.json` version
 - Create a git tag
 - Commit the changes
@@ -111,11 +112,13 @@ Then publish with: `npm publish`
 ## Package Contents
 
 The `files` field in `package.json` ensures only these are published:
+
 - `src/` - All source code
 - `README.md` - Documentation
 - `CHANGELOG.md` - Version history
 
 This excludes:
+
 - Test files
 - Documentation files in `docs/`
 - Example screens
@@ -140,16 +143,18 @@ npm install rn-expo-core
 ## Troubleshooting
 
 ### "Package name already exists"
+
 - Choose a different name
 - Or use a scoped package: `@yourusername/rn-expo-core`
 
 ### "You do not have permission"
+
 - Make sure you're logged in: `npm whoami`
 - Check if the package name is available
 - For scoped packages, ensure you have the right permissions
 
 ### "Invalid package name"
+
 - Package names must be lowercase
 - Can contain hyphens and underscores
 - Cannot start with a dot or underscore
-

@@ -20,9 +20,15 @@ export const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({
 }) => {
   const layout = useLayout();
 
+  const resolvedMaxWidth = maxWidth
+    ? getResponsiveValue(maxWidth, layout.width)
+    : undefined;
+
   const containerStyle = {
     width: "100%" as const,
-    maxWidth: maxWidth ? getResponsiveValue(maxWidth, layout.width) : undefined,
+    maxWidth: resolvedMaxWidth,
+    // Center the container when maxWidth is set, but allow parent to stretch
+    alignSelf: resolvedMaxWidth ? ("center" as const) : undefined,
     padding: paddingValue
       ? getResponsiveValue(paddingValue, layout.width)
       : undefined,

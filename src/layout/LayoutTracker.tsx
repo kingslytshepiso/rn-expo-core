@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Dimensions, ScaledSize } from "react-native";
 import {
   Breakpoint,
@@ -7,7 +13,7 @@ import {
   getDeviceType,
 } from "./breakpoints";
 
-interface LayoutContextValue {
+export interface LayoutContextValue {
   width: number;
   height: number;
   breakpoint: Breakpoint;
@@ -18,41 +24,67 @@ interface LayoutContextValue {
 
 const LayoutContext = createContext<LayoutContextValue | undefined>(undefined);
 
-interface LayoutTrackerProps {
+export interface LayoutTrackerProps {
   children: React.ReactNode;
+  /**
+   * Debounce delay in milliseconds for dimension changes.
+   * Default: 100ms. Set to 0 to disable debouncing.
+   */
+  debounceMs?: number;
 }
 
-export const LayoutTracker: React.FC<LayoutTrackerProps> = ({ children }) => {
+export const LayoutTracker: React.FC<LayoutTrackerProps> = ({
+  children,
+  debounceMs = 100,
+}) => {
   const [dimensions, setDimensions] = useState(() => {
     const { width, height } = Dimensions.get("window");
     return { width, height };
   });
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
     const subscription = Dimensions.addEventListener(
       "change",
       ({ window }: { window: ScaledSize }) => {
-        setDimensions({ width: window.width, height: window.height });
+        // Debounce rapid dimension changes to improve performance
+        if (debounceMs > 0) {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+          timeoutId = setTimeout(() => {
+            setDimensions({ width: window.width, height: window.height });
+          }, debounceMs);
+        } else {
+          // No debouncing - update immediately
+          setDimensions({ width: window.width, height: window.height });
+        }
       },
     );
 
-    return () => subscription?.remove();
-  }, []);
+    return () => {
+      subscription?.remove();
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [debounceMs]);
 
   const { width, height } = dimensions;
-  const breakpoint = getBreakpoint(width);
-  const deviceType = getDeviceType(width);
-  const isPortrait = height > width;
-  const isLandscape = width > height;
 
-  const value: LayoutContextValue = {
-    width,
-    height,
-    breakpoint,
-    deviceType,
-    isPortrait,
-    isLandscape,
-  };
+  // Memoize computed values to avoid recalculating on every render
+  const value: LayoutContextValue = useMemo(
+    () => ({
+      width,
+      height,
+      breakpoint: getBreakpoint(width),
+      deviceType: getDeviceType(width),
+      isPortrait: height > width,
+      isLandscape: width > height,
+    }),
+    [width, height],
+  );
 
   return (
     <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>

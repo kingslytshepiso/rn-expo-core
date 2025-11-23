@@ -1,0 +1,176 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "src/**"
+      - "README.md"
+      - "typedoc.json"
+      - "package.json"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeDoc documentation
+        run: npm run docs:build
+
+      - name: Build Expo web application
+        run: npm run build:web
+        env:
+          CI: true
+
+      - name: Combine documentation and web app
+        run: |
+          mkdir -p docs/combined
+          # Copy Expo web build to demo subdirectory
+          mkdir -p docs/combined/demo
+          cp -r web-build/* docs/combined/demo/ || true
+          # Create api subdirectory for TypeDoc documentation
+          mkdir -p docs/combined/api
+          cp -r docs/api/* docs/combined/api/ || true
+          # Create landing page at root
+          cat > docs/combined/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>rn-expo-core Documentation</title>
+            <style>
+              * { box-sizing: border-box; margin: 0; padding: 0; }
+              body { 
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+              }
+              .container {
+                max-width: 900px;
+                width: 100%;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                padding: 40px;
+              }
+              h1 { 
+                color: #333;
+                font-size: 2.5em;
+                margin-bottom: 10px;
+                text-align: center;
+              }
+              .subtitle {
+                text-align: center;
+                color: #666;
+                margin-bottom: 40px;
+                font-size: 1.1em;
+              }
+              .links { 
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+                margin-top: 30px;
+              }
+              .link-card { 
+                border: 2px solid #e0e0e0;
+                border-radius: 12px;
+                padding: 30px;
+                text-decoration: none;
+                color: inherit;
+                transition: all 0.3s ease;
+                background: #fafafa;
+              }
+              .link-card:hover { 
+                transform: translateY(-4px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                border-color: #667eea;
+                background: white;
+              }
+              .link-card h2 { 
+                margin-top: 0;
+                margin-bottom: 10px;
+                color: #667eea;
+                font-size: 1.5em;
+              }
+              .link-card p {
+                color: #666;
+                line-height: 1.6;
+              }
+              .emoji {
+                font-size: 2em;
+                display: block;
+                margin-bottom: 10px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>rn-expo-core</h1>
+              <p class="subtitle">A reusable component utility package for cross-platform React Native Expo projects</p>
+              <div class="links">
+                <a href="./demo/" class="link-card">
+                  <span class="emoji">📱</span>
+                  <h2>Demo App</h2>
+                  <p>Interactive demo application showcasing components, theming, and responsive design features</p>
+                </a>
+                <a href="./api/" class="link-card">
+                  <span class="emoji">📚</span>
+                  <h2>API Reference</h2>
+                  <p>Complete API documentation generated from TypeScript source code</p>
+                </a>
+              </div>
+            </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "docs/combined"
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    # Only deploy from master branch
+    if: github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs/api",
+  "theme": "default",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "readme": "none",
+  "name": "rn-expo-core API Documentation",
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Providers",
+    "Components",
+    "Layout",
+    "Theme",
+    "Styles",
+    "*"
+  ],
+  "gitRevision": "master",
+  "gitRemote": "origin"
+}

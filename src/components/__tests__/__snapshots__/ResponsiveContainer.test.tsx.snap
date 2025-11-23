@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResponsiveContainer should match snapshot with default props 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": undefined,
+            "gap": undefined,
+            "maxWidth": undefined,
+            "padding": undefined,
+            "width": "100%",
+          },
+          undefined,
+        ]
+      }
+      testID="responsive-container"
+    >
+      <Text>
+        Snapshot Test
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`ResponsiveContainer should match snapshot with maxWidth 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": "center",
+            "gap": undefined,
+            "maxWidth": 1200,
+            "padding": undefined,
+            "width": "100%",
+          },
+          undefined,
+        ]
+      }
+      testID="responsive-container"
+    >
+      <Text>
+        Snapshot Test
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`ResponsiveContainer should match snapshot with padding and gap 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": undefined,
+            "gap": 8,
+            "maxWidth": undefined,
+            "padding": 16,
+            "width": "100%",
+          },
+          undefined,
+        ]
+      }
+      testID="responsive-container"
+    >
+      <Text>
+        Snapshot Test
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;

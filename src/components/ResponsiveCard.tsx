@@ -42,14 +42,24 @@ export const ResponsiveCard: React.FC<ResponsiveCardProps> = ({
     : defaultPadding;
 
   return (
-    <View style={containerStyle}>
+    <View style={containerStyle} testID="responsive-card-container">
       {onPress ? (
         <Card mode={mode} style={style} onPress={onPress}>
-          <View style={{ padding: cardPadding }}>{children}</View>
+          <View
+            style={{ padding: cardPadding }}
+            testID="responsive-card-content"
+          >
+            {children}
+          </View>
         </Card>
       ) : (
         <Card mode={mode} style={style}>
-          <View style={{ padding: cardPadding }}>{children}</View>
+          <View
+            style={{ padding: cardPadding }}
+            testID="responsive-card-content"
+          >
+            {children}
+          </View>
         </Card>
       )}
     </View>

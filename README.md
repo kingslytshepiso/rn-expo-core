@@ -62,7 +62,21 @@ core/
 
 ### Setup
 
-Wrap your app with the required providers:
+#### Option 1: Using AppProviders (Recommended)
+
+The easiest way to set up all required providers:
+
+```tsx
+import { AppProviders } from "rn-expo-core";
+
+export default function App() {
+  return <AppProviders theme="auto">{/* Your app content */}</AppProviders>;
+}
+```
+
+#### Option 2: Individual Providers
+
+For more control, you can use providers individually:
 
 ```tsx
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -79,7 +93,22 @@ export default function App() {
 }
 ```
 
+### Exported Types
+
+All context types and provider props are exported for TypeScript users:
+
+```tsx
+import type {
+  LayoutContextValue,
+  LayoutTrackerProps,
+  ThemeProviderProps,
+  AppProvidersProps,
+} from "rn-expo-core";
+```
+
 ### Using the Theme
+
+#### Built-in Themes
 
 ```tsx
 import { useTheme } from "rn-expo-core";
@@ -93,6 +122,48 @@ function MyComponent() {
     </View>
   );
 }
+```
+
+#### Custom Themes
+
+You can pass your own React Native Paper theme:
+
+```tsx
+import { AppProviders, MD3Theme } from "rn-expo-core";
+import { MD3LightTheme } from "react-native-paper";
+
+const customTheme: MD3Theme = {
+  ...MD3LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    primary: "#ff6b6b",
+    secondary: "#4ecdc4",
+  },
+};
+
+export default function App() {
+  return (
+    <AppProviders theme={customTheme}>
+      <YourApp />
+    </AppProviders>
+  );
+}
+```
+
+Or use with individual providers:
+
+```tsx
+import { ThemeProvider, MD3Theme } from "rn-expo-core";
+import { MD3DarkTheme } from "react-native-paper";
+
+const myCustomTheme: MD3Theme = {
+  ...MD3DarkTheme,
+  // Customize your theme
+};
+
+<ThemeProvider theme={myCustomTheme}>
+  <App />
+</ThemeProvider>;
 ```
 
 ### Using Layout Tracking

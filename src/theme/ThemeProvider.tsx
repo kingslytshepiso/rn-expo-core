@@ -1,7 +1,7 @@
 import React from "react";
 import { PaperProvider, MD3Theme } from "react-native-paper";
 import { useColorScheme } from "react-native";
-import { lightTheme, darkTheme, AppTheme } from "./themeConfig";
+import { lightTheme, darkTheme } from "./themeConfig";
 
 export interface ThemeProviderProps {
   children: React.ReactNode;

@@ -36,7 +36,11 @@ export const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({
   };
 
   return (
-    <View style={[containerStyle, style]} {...props}>
+    <View
+      style={[containerStyle, style]}
+      testID="responsive-container"
+      {...props}
+    >
       {children}
     </View>
   );

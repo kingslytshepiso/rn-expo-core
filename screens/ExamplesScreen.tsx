@@ -8,14 +8,19 @@ import {
   Surface,
   Title,
 } from "react-native-paper";
+// Demo app imports from the package using relative paths
+// When published, users will import from 'rn-expo-core'
 import {
   ResponsiveCard,
   ResponsiveContainer,
   ResponsiveText,
-} from "../src/components";
-import { useLayout } from "../src/layout";
-import { borderRadius, flex, margin, padding } from "../src/styles";
-import { useTheme } from "../src/theme";
+  useLayout,
+  borderRadius,
+  flex,
+  margin,
+  padding,
+  useTheme,
+} from "../src";
 
 export const ExamplesScreen: React.FC = () => {
   const theme = useTheme();

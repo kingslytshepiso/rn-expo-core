@@ -15,8 +15,26 @@ A reusable component utility package for cross-platform React Native Expo projec
 ## Installation
 
 ```bash
-npm install
+npm install rn-expo-core
 ```
+
+### Peer Dependencies
+
+Install required peer dependencies:
+
+```bash
+npx expo install react-native-paper react-native-safe-area-context react-native-screens
+```
+
+## Documentation
+
+For detailed documentation, see the [docs](./docs/) directory:
+
+- **[Usage Guide](./docs/USAGE_GUIDE.md)** - Complete API documentation
+- **[Consumption Example](./docs/CONSUMPTION_EXAMPLE.md)** - Integration guide
+- **[Project Structure](./docs/PROJECT_STRUCTURE.md)** - Package organization
+
+See [docs/README.md](./docs/README.md) for the full documentation index.
 
 ## Dependencies
 
@@ -47,9 +65,8 @@ core/
 Wrap your app with the required providers:
 
 ```tsx
-import { ThemeProvider } from './src/theme';
-import { LayoutTracker } from './src/layout';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider, LayoutTracker } from 'rn-expo-core';
 
 export default function App() {
   return (
@@ -67,7 +84,7 @@ export default function App() {
 ### Using the Theme
 
 ```tsx
-import { useTheme } from './src/theme';
+import { useTheme } from 'rn-expo-core';
 
 function MyComponent() {
   const theme = useTheme();
@@ -83,7 +100,7 @@ function MyComponent() {
 ### Using Layout Tracking
 
 ```tsx
-import { useLayout } from './src/layout';
+import { useLayout } from 'rn-expo-core';
 
 function MyComponent() {
   const { width, height, deviceType, isMobile, isDesktop } = useLayout();
@@ -99,7 +116,7 @@ function MyComponent() {
 ### Using Responsive Components
 
 ```tsx
-import { ResponsiveContainer, ResponsiveText, ResponsiveCard } from './src/components';
+import { ResponsiveContainer, ResponsiveText, ResponsiveCard } from 'rn-expo-core';
 
 function MyScreen() {
   return (
@@ -118,7 +135,7 @@ function MyScreen() {
 ### Using Layout Utilities
 
 ```tsx
-import { flex, padding, margin, borderRadius } from './src/styles';
+import { flex, padding, margin, borderRadius } from 'rn-expo-core';
 
 function MyComponent() {
   return (

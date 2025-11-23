@@ -1,104 +1,117 @@
 # Project Structure
 
-This document outlines the structure of the Core React Native Expo Component Utility Package.
+This project is organized to serve two purposes:
+1. **Publishable Package**: The `src/` directory contains the reusable package code
+2. **Demo/Test App**: The root-level files (`App.tsx`, `screens/`) provide a demo app to test components
 
-## Directory Structure
+## Package Structure (`src/`)
+
+The `src/` directory contains the publishable package:
 
 ```
-core/
-├── src/                          # Main utility package source
-│   ├── components/               # Reusable responsive components
-│   │   ├── ResponsiveContainer.tsx
-│   │   ├── ResponsiveText.tsx
-│   │   ├── ResponsiveCard.tsx
-│   │   └── index.ts
-│   ├── layout/                   # Layout tracking and responsive utilities
-│   │   ├── LayoutTracker.tsx    # Context provider for layout tracking
-│   │   ├── useLayout.ts         # Hook for accessing layout info
-│   │   ├── breakpoints.ts       # Breakpoint definitions
-│   │   ├── responsive.ts        # Responsive value utilities
-│   │   ├── __tests__/           # Unit tests
-│   │   └── index.ts
-│   ├── styles/                   # Styling utilities
-│   │   ├── createStyles.ts      # Responsive style helpers
-│   │   ├── spacing.ts           # Spacing scale utilities
-│   │   ├── layoutStyles.ts      # Layout utility classes
-│   │   ├── __tests__/           # Unit tests
-│   │   └── index.ts
-│   ├── theme/                    # Theming system
-│   │   ├── ThemeProvider.tsx    # Theme provider component
-│   │   ├── themeConfig.ts       # Light/dark theme configurations
-│   │   ├── useTheme.ts          # Hook for accessing theme
-│   │   ├── __tests__/           # Unit tests
-│   │   └── index.ts
-│   └── index.ts                  # Main package entry point
-├── screens/                      # Example screens
-│   └── ExamplesScreen.tsx       # Demo screen showcasing components
-├── App.tsx                       # Main app entry point
-├── package.json                  # Dependencies and scripts
-├── tsconfig.json                 # TypeScript configuration
-├── jest.config.js                # Jest testing configuration
-├── .eslintrc.js                  # ESLint configuration (Expo default)
-├── CHANGELOG.md                  # Changelog tracking
-├── README.md                     # Project documentation
-├── SETUP.md                      # Setup instructions
-└── PROJECT_STRUCTURE.md          # This file
+src/
+├── components/     # Reusable responsive components
+├── layout/         # Layout tracking and responsive utilities
+├── styles/         # Styling utilities and classes
+└── theme/          # Theming system based on react-native-paper
 ```
 
-## Key Features
+**Entry Point**: `src/index.ts` exports all public APIs
 
-### 1. Theming System (`src/theme/`)
-- Built on React Native Paper
-- Light and dark theme support
-- Automatic theme switching based on system preferences
-- Customizable color palette and typography
+## Demo App Structure
 
-### 2. Layout Tracking (`src/layout/`)
-- Real-time screen dimension tracking
-- Breakpoint system (xs, sm, md, lg, xl, xxl)
-- Device type detection (mobile, tablet, desktop)
-- Orientation tracking (portrait/landscape)
-- Responsive value utilities
+The demo app is located at the project root:
 
-### 3. Styling Utilities (`src/styles/`)
-- Spacing scale based on 8px grid
-- Flexbox layout utilities
-- Padding and margin helpers
-- Border radius utilities
-- Responsive style creation helpers
-
-### 4. Reusable Components (`src/components/`)
-- `ResponsiveContainer`: Container with responsive max-width and padding
-- `ResponsiveText`: Text component with responsive font sizes
-- `ResponsiveCard`: Card component with responsive padding and margins
-
-## Testing
-
-Unit tests are located in `__tests__` directories alongside their source files:
-- `src/theme/__tests__/` - Theme configuration tests
-- `src/layout/__tests__/` - Breakpoint and responsive utility tests
-- `src/styles/__tests__/` - Spacing utility tests
-
-## Usage Flow
-
-1. **App Setup**: Wrap app with `ThemeProvider` and `LayoutTracker`
-2. **Component Development**: Use hooks (`useTheme`, `useLayout`) and utilities
-3. **Styling**: Apply responsive styles using utilities and helper functions
-4. **Testing**: Run tests to ensure functionality
-5. **Linting**: Use ESLint to maintain code quality
+```
+.
+├── App.tsx              # Main app component (demo app entry)
+├── screens/              # Demo screens showing package usage
+│   └── ExamplesScreen.tsx
+├── index.ts              # Expo entry point
+└── assets/               # Demo app assets
+```
 
 ## Entry Points
 
-- **Package Entry**: `src/index.ts` - Exports all public APIs
-- **App Entry**: `App.tsx` - Main application component
-- **Examples**: `screens/ExamplesScreen.tsx` - Demo screen
+### App Entry Point (for running the demo)
 
-## Configuration Files
+- **File**: `index.ts` at root
+- **Purpose**: Registers the App component with Expo
+- **Used by**: Expo when running `npm start`
 
-- `package.json` - Dependencies and npm scripts
-- `tsconfig.json` - TypeScript compiler options
-- `jest.config.js` - Jest test configuration
-- `.eslintrc.js` - ESLint rules (using Expo defaults)
-- `CHANGELOG.md` - Version history and changes
+### Package Entry Point (for publishing)
 
+- **File**: `src/index.ts`
+- **Purpose**: Exports all public APIs of the package
+- **Used by**: npm when users install the package
 
+## Import Patterns
+
+### In the Demo App
+
+The demo app imports from the package using relative paths:
+
+```typescript
+// In App.tsx or screens/ExamplesScreen.tsx
+import { ThemeProvider, LayoutTracker } from "./src";
+import { ResponsiveCard, useLayout } from "../src";
+```
+
+### After Publishing
+
+When the package is published, users will import like this:
+
+```typescript
+import { ThemeProvider, LayoutTracker, ResponsiveCard, useLayout } from "rn-expo-core";
+```
+
+## Package Publishing
+
+The `package.json` `files` field ensures only the package code is published:
+
+```json
+{
+  "files": [
+    "src",           // Package source code
+    "README.md",     // Documentation
+    "CHANGELOG.md"   // Version history
+  ]
+}
+```
+
+**Excluded from package**:
+- Demo app files (`App.tsx`, `screens/`, `index.ts`)
+- Configuration files (`babel.config.js`, `tsconfig.json`, etc.)
+- Test files (though they're in `src/`, they won't be imported by users)
+- Documentation in `docs/` folder
+
+## Development Workflow
+
+1. **Develop Package**: Edit files in `src/` directory
+2. **Test Components**: Use the demo app (`App.tsx`, `screens/ExamplesScreen.tsx`) to test components
+3. **Run Tests**: `npm test` runs unit tests in `src/**/__tests__/`
+4. **Publish**: Only `src/` and documentation files are published
+
+## Running the Demo App
+
+```bash
+npm start          # Start Expo dev server
+npm run android    # Run on Android
+npm run ios        # Run on iOS
+npm run web        # Run on web
+```
+
+## Testing the Package
+
+```bash
+npm test           # Run all tests
+npm run test:watch # Watch mode
+```
+
+## Key Points
+
+- ✅ Package code is isolated in `src/`
+- ✅ Demo app can test components without affecting package structure
+- ✅ Publishing only includes package code, not demo app
+- ✅ Clear separation between package and demo app
+- ✅ Same import pattern works in both contexts (relative paths in demo, package name when published)

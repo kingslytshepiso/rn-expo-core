@@ -1,0 +1,34 @@
+# App entry point (not part of package)
+index.ts
+App.tsx
+screens/
+assets/
+
+# Configuration files
+babel.config.js
+tsconfig.json
+eslint.config.js
+.gitignore
+.npmignore
+
+# Documentation (except README and CHANGELOG)
+docs/
+PROJECT_STRUCTURE.md
+CONSUMPTION_EXAMPLE.md
+PUBLISH_INSTRUCTIONS.md
+
+# Development files
+*.test.ts
+*.test.tsx
+__tests__/
+
+# Expo
+.expo/
+web-build/
+dist/
+
+# Other
+node_modules/
+coverage/
+*.tgz
+

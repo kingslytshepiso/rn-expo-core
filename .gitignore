@@ -45,7 +45,7 @@ yarn-error.*
 # Testing
 coverage/
 
-# Documentation (keep index.html and styles.css, ignore generated API docs)
+# Documentation
 docs/api/
 
 # Husky

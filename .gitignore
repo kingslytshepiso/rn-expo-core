@@ -45,6 +45,9 @@ yarn-error.*
 # Testing
 coverage/
 
+# Documentation
+docs/api/
+
 # Husky
 .husky/_/
 

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rn-expo-core - React Native Expo Component Utility Package</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-brand">
+          <h1>rn-expo-core</h1>
+          <span class="version">v1.0.0</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#getting-started">Getting Started</a>
+          <a href="#examples">Examples</a>
+          <a href="api/index.html">API Reference</a>
+          <a
+            href="https://github.com/kingslytshepiso/rn-expo-core"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <h1 class="hero-title">
+            Build Beautiful, Responsive React Native Apps
+          </h1>
+          <p class="hero-subtitle">
+            A utility package for cross-platform React Native Expo projects
+            with theming, layout tracking, and responsive design utilities.
+          </p>
+          <div class="hero-actions">
+            <a href="#getting-started" class="btn btn-primary"
+              >Get Started</a
+            >
+            <a
+              href="https://github.com/kingslytshepiso/rn-expo-core"
+              class="btn btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="features">
+        <div class="container">
+          <h2 class="section-title">Features</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🎨</div>
+              <h3>Theming System</h3>
+              <p>
+                Built on React Native Paper with light/dark theme support and
+                custom theme capabilities.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📱</div>
+              <h3>Responsive Design</h3>
+              <p>
+                Real-time layout tracking for mobile, tablet, and desktop with
+                automatic breakpoint detection.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🎯</div>
+              <h3>Layout Utilities</h3>
+              <p>
+                Reusable styling classes for spacing, flexbox, borders, and
+                more.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🧩</div>
+              <h3>Reusable Components</h3>
+              <p>
+                Pre-built responsive components that adapt to different screen
+                sizes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Getting Started Section -->
+      <section id="getting-started" class="getting-started">
+        <div class="container">
+          <h2 class="section-title">Getting Started</h2>
+
+          <div class="step">
+            <h3>1. Installation</h3>
+            <div class="code-block">
+              <pre><code>npm install rn-expo-core</code></pre>
+            </div>
+            <p class="step-note">
+              Install peer dependencies:
+            </p>
+            <div class="code-block">
+              <pre><code>npx expo install react-native-paper react-native-safe-area-context react-native-screens</code></pre>
+            </div>
+          </div>
+
+          <div class="step">
+            <h3>2. Setup Providers</h3>
+            <p>
+              Wrap your app with <code>AppProviders</code> to enable all
+              features:
+            </p>
+            <div class="code-block">
+              <pre><code>import { AppProviders } from 'rn-expo-core';
+
+export default function App() {
+  return (
+    <AppProviders theme="auto">
+      {/* Your app content */}
+    </AppProviders>
+  );
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="step">
+            <h3>3. Use the Utilities</h3>
+            <p>Start using responsive components and utilities:</p>
+            <div class="code-block">
+              <pre><code>import { 
+  ResponsiveContainer, 
+  ResponsiveText, 
+  useLayout, 
+  useTheme 
+} from 'rn-expo-core';
+
+function MyScreen() {
+  const { isDesktop } = useLayout();
+  const theme = useTheme();
+
+  return (
+    <ResponsiveContainer 
+      maxWidth={isDesktop ? 1200 : undefined}
+      padding={16}
+    >
+      <ResponsiveText variant="headline">
+        Hello World
+      </ResponsiveText>
+    </ResponsiveContainer>
+  );
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Examples Section -->
+      <section id="examples" class="examples">
+        <div class="container">
+          <h2 class="section-title">Examples</h2>
+
+          <div class="example-card">
+            <h3>🎨 Theming</h3>
+            <p>Use built-in themes or create custom ones:</p>
+            <div class="code-block">
+              <pre><code>// Built-in themes
+<AppProviders theme="light">  {/* or "dark" or "auto" */}
+  <App />
+</AppProviders>
+
+// Custom theme
+import { MD3LightTheme } from 'react-native-paper';
+
+const customTheme = {
+  ...MD3LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    primary: '#ff6b6b',
+  },
+};
+
+<AppProviders theme={customTheme}>
+  <App />
+</AppProviders></code></pre>
+            </div>
+          </div>
+
+          <div class="example-card">
+            <h3>📱 Responsive Layout</h3>
+            <p>Track device size and adapt your UI:</p>
+            <div class="code-block">
+              <pre><code>import { useLayout } from 'rn-expo-core';
+
+function MyComponent() {
+  const { 
+    width, 
+    height, 
+    isMobile, 
+    isTablet, 
+    isDesktop,
+    breakpoint 
+  } = useLayout();
+
+  return (
+    <View style={{ 
+      padding: isMobile ? 16 : isTablet ? 24 : 32 
+    }}>
+      <Text>Device: {isMobile ? 'Mobile' : isTablet ? 'Tablet' : 'Desktop'}</Text>
+      <Text>Breakpoint: {breakpoint}</Text>
+      <Text>Size: {width}x{height}</Text>
+    </View>
+  );
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="example-card">
+            <h3>🎯 Layout Utilities</h3>
+            <p>Use utility functions for consistent styling:</p>
+            <div class="code-block">
+              <pre><code>import { flex, padding, margin, borderRadius } from 'rn-expo-core';
+
+<View style={[
+  flex.row,
+  flex.spaceBetween,
+  padding.all(4),
+  borderRadius.md
+]}>
+  <View style={[padding.all(2), borderRadius.sm]}>
+    <Text>Item 1</Text>
+  </View>
+  <View style={[padding.all(2), borderRadius.sm]}>
+    <Text>Item 2</Text>
+  </View>
+</View></code></pre>
+            </div>
+          </div>
+
+          <div class="example-card">
+            <h3>🧩 Responsive Components</h3>
+            <p>Use pre-built responsive components:</p>
+            <div class="code-block">
+              <pre><code>import { ResponsiveContainer, ResponsiveCard, ResponsiveText } from 'rn-expo-core';
+
+<ResponsiveContainer maxWidth={{ md: 768, lg: 1200 }} padding={16}>
+  <ResponsiveCard>
+    <Card.Content>
+      <ResponsiveText variant="headline">Title</ResponsiveText>
+      <ResponsiveText variant="body">Content</ResponsiveText>
+    </Card.Content>
+  </ResponsiveCard>
+</ResponsiveContainer></code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Reference Link -->
+      <section class="api-reference">
+        <div class="container">
+          <div class="api-card">
+            <h2>📚 API Reference</h2>
+            <p>
+              For complete API documentation with all types, interfaces, and
+              detailed function signatures, check out the TypeDoc-generated API
+              reference.
+            </p>
+            <a href="api/index.html" class="btn btn-primary">View API Reference</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          Made with ❤️ by
+          <a
+            href="https://github.com/kingslytshepiso"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            kingslytshepiso
+          </a>
+        </p>
+        <p>
+          <a
+            href="https://github.com/kingslytshepiso/rn-expo-core"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </a>
+          |
+          <a href="api/index.html">API Reference</a>
+          |
+          <a
+            href="https://github.com/kingslytshepiso/rn-expo-core/blob/master/LICENSE"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            License
+          </a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+

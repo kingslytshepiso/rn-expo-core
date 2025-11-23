@@ -62,7 +62,21 @@ core/
 
 ### Setup
 
-Wrap your app with the required providers:
+#### Option 1: Using AppProviders (Recommended)
+
+The easiest way to set up all required providers:
+
+```tsx
+import { AppProviders } from "rn-expo-core";
+
+export default function App() {
+  return <AppProviders theme="auto">{/* Your app content */}</AppProviders>;
+}
+```
+
+#### Option 2: Individual Providers
+
+For more control, you can use providers individually:
 
 ```tsx
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -77,6 +91,19 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
+```
+
+### Exported Types
+
+All context types and provider props are exported for TypeScript users:
+
+```tsx
+import type {
+  LayoutContextValue,
+  LayoutTrackerProps,
+  ThemeProviderProps,
+  AppProvidersProps,
+} from "rn-expo-core";
 ```
 
 ### Using the Theme

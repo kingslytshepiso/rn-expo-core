@@ -3,7 +3,7 @@ import { PaperProvider } from "react-native-paper";
 import { useColorScheme } from "react-native";
 import { lightTheme, darkTheme, AppTheme } from "./themeConfig";
 
-interface ThemeProviderProps {
+export interface ThemeProviderProps {
   children: React.ReactNode;
   theme?: "light" | "dark" | "auto";
 }

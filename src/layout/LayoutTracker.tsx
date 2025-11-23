@@ -13,7 +13,7 @@ import {
   getDeviceType,
 } from "./breakpoints";
 
-interface LayoutContextValue {
+export interface LayoutContextValue {
   width: number;
   height: number;
   breakpoint: Breakpoint;
@@ -24,7 +24,7 @@ interface LayoutContextValue {
 
 const LayoutContext = createContext<LayoutContextValue | undefined>(undefined);
 
-interface LayoutTrackerProps {
+export interface LayoutTrackerProps {
   children: React.ReactNode;
   /**
    * Debounce delay in milliseconds for dimension changes.

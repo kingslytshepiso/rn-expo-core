@@ -87,12 +87,10 @@ import { useTheme } from "rn-expo-core";
 
 function MyComponent() {
   const theme = useTheme();
-  
+
   return (
     <View style={{ backgroundColor: theme.colors.background }}>
-      <Text style={{ color: theme.colors.text }}>
-        Hello World
-      </Text>
+      <Text style={{ color: theme.colors.text }}>Hello World</Text>
     </View>
   );
 }
@@ -109,7 +107,7 @@ import { LayoutTracker } from "rn-expo-core";
 
 <LayoutTracker>
   <App />
-</LayoutTracker>
+</LayoutTracker>;
 ```
 
 #### useLayout Hook
@@ -121,7 +119,7 @@ import { useLayout } from "rn-expo-core";
 
 function MyComponent() {
   const layout = useLayout();
-  
+
   return (
     <View>
       <Text>Width: {layout.width}</Text>
@@ -164,10 +162,10 @@ import { useLayout } from "rn-expo-core";
 
 function MyComponent() {
   const layout = useLayout();
-  
+
   // Single value
   const padding = getResponsiveValue(16, layout.width);
-  
+
   // Responsive object
   const margin = getResponsiveValue(
     responsive({
@@ -177,9 +175,9 @@ function MyComponent() {
       lg: 24,
       xl: 32,
     }),
-    layout.width
+    layout.width,
   );
-  
+
   return (
     <View style={{ padding, margin }}>
       <Text>Responsive padding and margin</Text>
@@ -235,7 +233,7 @@ import {
   ]}
 >
   <Text>Styled with utilities</Text>
-</View>
+</View>;
 ```
 
 ### 5. Responsive Components
@@ -250,7 +248,7 @@ import { useLayout } from "rn-expo-core";
 
 function MyScreen() {
   const layout = useLayout();
-  
+
   return (
     <ResponsiveContainer
       maxWidth={layout.isDesktop ? 1200 : undefined}
@@ -278,7 +276,7 @@ import { ResponsiveText } from "rn-expo-core";
   style={{ fontSize: responsive({ xs: 16, md: 20, lg: 24 }) }}
 >
   Responsive Text
-</ResponsiveText>
+</ResponsiveText>;
 ```
 
 #### ResponsiveCard
@@ -295,7 +293,7 @@ import { ResponsiveCard } from "rn-expo-core";
   margin={responsive({ xs: 8, md: 16 })}
 >
   <Text>Card Content</Text>
-</ResponsiveCard>
+</ResponsiveCard>;
 ```
 
 ## Complete Example
@@ -340,14 +338,14 @@ function HomeScreen() {
           >
             Welcome to rn-expo-core
           </ResponsiveText>
-          
+
           <ResponsiveText
             variant="bodyMedium"
             style={{ color: theme.colors.text, marginTop: getSpacing(2) }}
           >
             Current breakpoint: {layout.breakpoint}
           </ResponsiveText>
-          
+
           <ResponsiveText
             variant="bodyMedium"
             style={{ color: theme.colors.text }}
@@ -415,4 +413,3 @@ Make sure TypeScript is configured and `@types/react` and `@types/react-native` 
 ## API Reference
 
 See the main [README.md](../README.md) for complete API documentation.
-

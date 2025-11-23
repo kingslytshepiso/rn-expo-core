@@ -1,6 +1,7 @@
 # Entry Points Configuration
 
 This project uses a dual entry point setup to support both:
+
 1. **Running the demo app** (for development and testing)
 2. **Publishing the package** (for distribution)
 
@@ -63,4 +64,3 @@ import { ThemeProvider, LayoutTracker } from "rn-expo-core";
 - The `exports` field is for npm package resolution
 - Both can coexist without conflict
 - When publishing, only `src/` is included (not `index.ts` or `App.tsx`)
-

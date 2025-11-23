@@ -108,6 +108,8 @@ import type {
 
 ### Using the Theme
 
+#### Built-in Themes
+
 ```tsx
 import { useTheme } from "rn-expo-core";
 
@@ -120,6 +122,48 @@ function MyComponent() {
     </View>
   );
 }
+```
+
+#### Custom Themes
+
+You can pass your own React Native Paper theme:
+
+```tsx
+import { AppProviders, MD3Theme } from "rn-expo-core";
+import { MD3LightTheme } from "react-native-paper";
+
+const customTheme: MD3Theme = {
+  ...MD3LightTheme,
+  colors: {
+    ...MD3LightTheme.colors,
+    primary: "#ff6b6b",
+    secondary: "#4ecdc4",
+  },
+};
+
+export default function App() {
+  return (
+    <AppProviders theme={customTheme}>
+      <YourApp />
+    </AppProviders>
+  );
+}
+```
+
+Or use with individual providers:
+
+```tsx
+import { ThemeProvider, MD3Theme } from "rn-expo-core";
+import { MD3DarkTheme } from "react-native-paper";
+
+const myCustomTheme: MD3Theme = {
+  ...MD3DarkTheme,
+  // Customize your theme
+};
+
+<ThemeProvider theme={myCustomTheme}>
+  <App />
+</ThemeProvider>;
 ```
 
 ### Using Layout Tracking

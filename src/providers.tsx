@@ -9,7 +9,9 @@ import { ThemeProvider, ThemeProviderProps } from "./theme";
 export interface AppProvidersProps {
   children: React.ReactNode;
   /**
-   * Theme configuration
+   * Theme configuration. Can be:
+   * - "light" | "dark" | "auto" - Use built-in themes
+   * - MD3Theme - Use a custom React Native Paper theme
    * @default "auto"
    */
   theme?: ThemeProviderProps["theme"];

@@ -136,4 +136,28 @@ describe("LayoutTracker", () => {
     );
     expect(mockDimensionsAddEventListener).toHaveBeenCalled();
   });
+
+  it("should match snapshot", () => {
+    const { toJSON } = render(
+      <LayoutTracker>
+        <Text>Test Content</Text>
+      </LayoutTracker>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with custom debounce", () => {
+    const { toJSON } = render(
+      <LayoutTracker debounceMs={200}>
+        <Text>Test Content</Text>
+      </LayoutTracker>,
+      {
+        wrapper: ({ children }) => (
+          <ThemeProvider theme="light">{children}</ThemeProvider>
+        ),
+      },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
 });

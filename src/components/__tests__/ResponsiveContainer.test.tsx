@@ -1,9 +1,9 @@
+import { render } from "@testing-library/react-native";
 import React from "react";
 import { Text } from "react-native";
-import { render } from "@testing-library/react-native";
-import { ResponsiveContainer } from "../ResponsiveContainer";
 import { LayoutTracker } from "../../layout";
 import { ThemeProvider } from "../../theme";
+import { ResponsiveContainer } from "../ResponsiveContainer";
 
 // Mock useLayout
 jest.mock("../../layout/useLayout", () => ({
@@ -208,5 +208,35 @@ describe("ResponsiveContainer", () => {
       {} as Record<string, any>,
     );
     expect(flattenedStyle.backgroundColor).toBe("red");
+  });
+
+  it("should match snapshot with default props", () => {
+    const { toJSON } = render(
+      <ResponsiveContainer>
+        <Text>Snapshot Test</Text>
+      </ResponsiveContainer>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with maxWidth", () => {
+    const { toJSON } = render(
+      <ResponsiveContainer maxWidth={1200}>
+        <Text>Snapshot Test</Text>
+      </ResponsiveContainer>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with padding and gap", () => {
+    const { toJSON } = render(
+      <ResponsiveContainer padding={16} gap={8}>
+        <Text>Snapshot Test</Text>
+      </ResponsiveContainer>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
   });
 });

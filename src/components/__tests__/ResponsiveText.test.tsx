@@ -155,4 +155,29 @@ describe("ResponsiveText", () => {
       expect.objectContaining({ fontWeight: "bold" }),
     );
   });
+
+  it("should match snapshot with default props", () => {
+    const { toJSON } = render(<ResponsiveText>Snapshot Test</ResponsiveText>, {
+      wrapper,
+    });
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with headline variant", () => {
+    const { toJSON } = render(
+      <ResponsiveText variant="headline">Headline Text</ResponsiveText>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with custom size and color", () => {
+    const { toJSON } = render(
+      <ResponsiveText size={20} color="#ff0000">
+        Custom Text
+      </ResponsiveText>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
 });

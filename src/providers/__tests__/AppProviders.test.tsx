@@ -109,4 +109,40 @@ describe("AppProviders", () => {
     // Should render without errors
     expect(result).toBeTruthy();
   });
+
+  it("should match snapshot with default props", () => {
+    const { toJSON } = render(
+      <AppProviders>
+        <Text>Snapshot Test</Text>
+      </AppProviders>,
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with light theme", () => {
+    const { toJSON } = render(
+      <AppProviders theme="light">
+        <Text>Snapshot Test</Text>
+      </AppProviders>,
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with custom theme and debounce", () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { MD3LightTheme } = require("react-native-paper");
+    const customTheme = {
+      ...MD3LightTheme,
+      colors: {
+        ...MD3LightTheme.colors,
+        primary: "#ff0000",
+      },
+    };
+    const { toJSON } = render(
+      <AppProviders theme={customTheme} layoutDebounceMs={200}>
+        <Text>Snapshot Test</Text>
+      </AppProviders>,
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
 });

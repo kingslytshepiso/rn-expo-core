@@ -31,7 +31,11 @@
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
-    "release:patch": "standard-version --release-as patch"
+    "release:patch": "standard-version --release-as patch",
+    "docs": "typedoc",
+    "docs:build": "typedoc --out docs/api",
+    "build:web": "npx expo export -p web --output-dir web-build",
+    "build:docs": "npm run docs:build && npm run build:web"
   },
   "dependencies": {
     "expo": "~54.0.25",

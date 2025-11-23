@@ -99,4 +99,38 @@ describe("ThemeProvider", () => {
       lightTheme.colors.primary,
     );
   });
+
+  it("should match snapshot with light theme", () => {
+    const { toJSON } = render(
+      <ThemeProvider theme="light">
+        <Text>Snapshot Test</Text>
+      </ThemeProvider>,
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with dark theme", () => {
+    const { toJSON } = render(
+      <ThemeProvider theme="dark">
+        <Text>Snapshot Test</Text>
+      </ThemeProvider>,
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with custom theme", () => {
+    const customTheme = {
+      ...MD3LightTheme,
+      colors: {
+        ...MD3LightTheme.colors,
+        primary: "#ff0000",
+      },
+    };
+    const { toJSON } = render(
+      <ThemeProvider theme={customTheme}>
+        <Text>Snapshot Test</Text>
+      </ThemeProvider>,
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
 });

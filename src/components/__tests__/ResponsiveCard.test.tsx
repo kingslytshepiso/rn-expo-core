@@ -230,4 +230,34 @@ describe("ResponsiveCard", () => {
     const card = UNSAFE_getByType(Card);
     expect(card.props.mode).toBe("outlined");
   });
+
+  it("should match snapshot with default props", () => {
+    const { toJSON } = render(
+      <ResponsiveCard>
+        <Text>Snapshot Test</Text>
+      </ResponsiveCard>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with outlined mode", () => {
+    const { toJSON } = render(
+      <ResponsiveCard mode="outlined">
+        <Text>Snapshot Test</Text>
+      </ResponsiveCard>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("should match snapshot with custom padding and margin", () => {
+    const { toJSON } = render(
+      <ResponsiveCard padding={20} margin={16}>
+        <Text>Snapshot Test</Text>
+      </ResponsiveCard>,
+      { wrapper },
+    );
+    expect(toJSON()).toMatchSnapshot();
+  });
 });

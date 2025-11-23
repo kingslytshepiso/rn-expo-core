@@ -65,16 +65,14 @@ core/
 Wrap your app with the required providers:
 
 ```tsx
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ThemeProvider, LayoutTracker } from 'rn-expo-core';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ThemeProvider, LayoutTracker } from "rn-expo-core";
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme="auto">
-        <LayoutTracker>
-          {/* Your app content */}
-        </LayoutTracker>
+        <LayoutTracker>{/* Your app content */}</LayoutTracker>
       </ThemeProvider>
     </SafeAreaProvider>
   );
@@ -84,11 +82,11 @@ export default function App() {
 ### Using the Theme
 
 ```tsx
-import { useTheme } from 'rn-expo-core';
+import { useTheme } from "rn-expo-core";
 
 function MyComponent() {
   const theme = useTheme();
-  
+
   return (
     <View style={{ backgroundColor: theme.colors.primary }}>
       <Text style={{ color: theme.colors.onPrimary }}>Hello</Text>
@@ -100,11 +98,11 @@ function MyComponent() {
 ### Using Layout Tracking
 
 ```tsx
-import { useLayout } from 'rn-expo-core';
+import { useLayout } from "rn-expo-core";
 
 function MyComponent() {
   const { width, height, deviceType, isMobile, isDesktop } = useLayout();
-  
+
   return (
     <View style={{ padding: isMobile ? 16 : 24 }}>
       <Text>Device: {deviceType}</Text>
@@ -116,7 +114,11 @@ function MyComponent() {
 ### Using Responsive Components
 
 ```tsx
-import { ResponsiveContainer, ResponsiveText, ResponsiveCard } from 'rn-expo-core';
+import {
+  ResponsiveContainer,
+  ResponsiveText,
+  ResponsiveCard,
+} from "rn-expo-core";
 
 function MyScreen() {
   return (
@@ -135,7 +137,7 @@ function MyScreen() {
 ### Using Layout Utilities
 
 ```tsx
-import { flex, padding, margin, borderRadius } from 'rn-expo-core';
+import { flex, padding, margin, borderRadius } from "rn-expo-core";
 
 function MyComponent() {
   return (
@@ -198,5 +200,3 @@ See [CHANGELOG.md](./CHANGELOG.md) for a detailed list of changes.
 ## License
 
 Private
-
-

@@ -4,4 +4,3 @@ import { AppTheme } from "./themeConfig";
 export const useTheme = (): AppTheme => {
   return usePaperTheme() as AppTheme;
 };
-

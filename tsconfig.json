@@ -2,27 +2,13 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    "types": [
-      "jest",
-      "@testing-library/jest-native"
-    ],
+    "types": ["jest", "@testing-library/jest-native"],
     "baseUrl": ".",
     "paths": {
-      "rn-expo-core": [
-        "./src/index.ts"
-      ],
-      "rn-expo-core/*": [
-        "./src/*"
-      ]
+      "rn-expo-core": ["./src/index.ts"],
+      "rn-expo-core/*": ["./src/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".expo"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist", ".expo"]
 }

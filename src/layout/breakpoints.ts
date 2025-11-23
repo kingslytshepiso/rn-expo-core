@@ -16,27 +16,27 @@ export type Breakpoint = keyof typeof BREAKPOINTS;
 /**
  * Device type categories
  */
-export type DeviceType = 'mobile' | 'tablet' | 'desktop';
+export type DeviceType = "mobile" | "tablet" | "desktop";
 
 /**
  * Get the current breakpoint based on width
  */
 export const getBreakpoint = (width: number): Breakpoint => {
-  if (width >= BREAKPOINTS.xxl) return 'xxl';
-  if (width >= BREAKPOINTS.xl) return 'xl';
-  if (width >= BREAKPOINTS.lg) return 'lg';
-  if (width >= BREAKPOINTS.md) return 'md';
-  if (width >= BREAKPOINTS.sm) return 'sm';
-  return 'xs';
+  if (width >= BREAKPOINTS.xxl) return "xxl";
+  if (width >= BREAKPOINTS.xl) return "xl";
+  if (width >= BREAKPOINTS.lg) return "lg";
+  if (width >= BREAKPOINTS.md) return "md";
+  if (width >= BREAKPOINTS.sm) return "sm";
+  return "xs";
 };
 
 /**
  * Get device type based on width
  */
 export const getDeviceType = (width: number): DeviceType => {
-  if (width >= BREAKPOINTS.lg) return 'desktop';
-  if (width >= BREAKPOINTS.md) return 'tablet';
-  return 'mobile';
+  if (width >= BREAKPOINTS.lg) return "desktop";
+  if (width >= BREAKPOINTS.md) return "tablet";
+  return "mobile";
 };
 
 /**
@@ -44,8 +44,7 @@ export const getDeviceType = (width: number): DeviceType => {
  */
 export const matchesBreakpoint = (
   width: number,
-  breakpoint: Breakpoint
+  breakpoint: Breakpoint,
 ): boolean => {
   return width >= BREAKPOINTS[breakpoint];
 };
-

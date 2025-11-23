@@ -23,7 +23,9 @@ export const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({
   const containerStyle = {
     width: "100%" as const,
     maxWidth: maxWidth ? getResponsiveValue(maxWidth, layout.width) : undefined,
-    padding: paddingValue ? getResponsiveValue(paddingValue, layout.width) : undefined,
+    padding: paddingValue
+      ? getResponsiveValue(paddingValue, layout.width)
+      : undefined,
     gap: gapValue ? getResponsiveValue(gapValue, layout.width) : undefined,
   };
 
@@ -33,4 +35,3 @@ export const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({
     </View>
   );
 };
-

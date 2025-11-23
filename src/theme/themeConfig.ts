@@ -160,4 +160,3 @@ export const darkTheme: MD3Theme = {
 
 // Theme type export
 export type AppTheme = typeof lightTheme;
-

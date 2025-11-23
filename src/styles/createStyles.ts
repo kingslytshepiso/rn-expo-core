@@ -9,7 +9,7 @@ type ResponsiveStyle = ResponsiveValue<Style>;
  * Helper to create responsive styles within a component
  */
 export const useResponsiveStyles = <T extends Record<string, ResponsiveStyle>>(
-  styles: T | ((layout: ReturnType<typeof useLayout>) => T)
+  styles: T | ((layout: ReturnType<typeof useLayout>) => T),
 ): { [K in keyof T]: Style } => {
   const layout = useLayout();
 
@@ -19,11 +19,11 @@ export const useResponsiveStyles = <T extends Record<string, ResponsiveStyle>>(
     (acc, [key, value]) => {
       acc[key] = getResponsiveValue(
         value as ResponsiveValue<Style>,
-        layout.width
+        layout.width,
       );
       return acc;
     },
-    {} as Record<string, Style>
+    {} as Record<string, Style>,
   );
 
   return processedStyles as { [K in keyof T]: Style };

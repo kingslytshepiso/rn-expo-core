@@ -62,6 +62,7 @@ npm view rn-expo-core
 ## 📝 What Gets Published
 
 Based on the `files` field in `package.json`, only these will be published:
+
 - `src/` directory (all source code including tests)
 - `README.md`
 - `CHANGELOG.md`
@@ -89,4 +90,3 @@ npm install rn-expo-core
 - The package will be publicly available on npmjs.com
 - You can unpublish within 72 hours if needed
 - Consider adding author information in `package.json` before publishing
-

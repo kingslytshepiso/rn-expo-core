@@ -55,4 +55,3 @@ export const ResponsiveCard: React.FC<ResponsiveCardProps> = ({
     </View>
   );
 };
-

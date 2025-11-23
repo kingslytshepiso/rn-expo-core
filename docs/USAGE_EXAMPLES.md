@@ -14,9 +14,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme="auto">
-        <LayoutTracker>
-          {/* Your app content */}
-        </LayoutTracker>
+        <LayoutTracker>{/* Your app content */}</LayoutTracker>
       </ThemeProvider>
     </SafeAreaProvider>
   );
@@ -36,9 +34,7 @@ function ThemedComponent() {
 
   return (
     <View style={{ backgroundColor: theme.colors.primary }}>
-      <Text style={{ color: theme.colors.onPrimary }}>
-        Themed Text
-      </Text>
+      <Text style={{ color: theme.colors.onPrimary }}>Themed Text</Text>
     </View>
   );
 }
@@ -123,7 +119,7 @@ function ResponsivePadding() {
       lg: 24,
       xl: 32,
     },
-    layout.width
+    layout.width,
   );
 
   return <View style={{ padding }}>Content</View>;
@@ -179,7 +175,7 @@ import { flex, padding, margin, borderRadius, width } from "./src/styles";
   ]}
 >
   <Text>Styled Container</Text>
-</View>
+</View>;
 ```
 
 ## Component Examples
@@ -215,10 +211,7 @@ function TextExample() {
       <ResponsiveText variant="label">Label</ResponsiveText>
 
       {/* Custom size */}
-      <ResponsiveText
-        size={{ xs: 12, md: 16, lg: 20 }}
-        color="#6200ee"
-      >
+      <ResponsiveText size={{ xs: 12, md: 16, lg: 20 }} color="#6200ee">
         Custom Text
       </ResponsiveText>
     </>
@@ -299,7 +292,11 @@ function BreakpointExample() {
 ```tsx
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { ResponsiveContainer, ResponsiveText, ResponsiveCard } from "./src/components";
+import {
+  ResponsiveContainer,
+  ResponsiveText,
+  ResponsiveCard,
+} from "./src/components";
 import { useLayout } from "./src/layout";
 import { useTheme } from "./src/theme";
 import { flex, padding, margin } from "./src/styles";
@@ -322,17 +319,10 @@ function Dashboard() {
         </ResponsiveText>
 
         <View
-          style={[
-            flex.row,
-            flex.wrap,
-            { gap: layout.isDesktop ? 16 : 12 },
-          ]}
+          style={[flex.row, flex.wrap, { gap: layout.isDesktop ? 16 : 12 }]}
         >
           <ResponsiveCard
-            style={[
-              { flex: layout.isDesktop ? 0.48 : 1 },
-              margin.bottom(2),
-            ]}
+            style={[{ flex: layout.isDesktop ? 0.48 : 1 }, margin.bottom(2)]}
           >
             <Card.Content>
               <ResponsiveText variant="title">Card 1</ResponsiveText>
@@ -340,10 +330,7 @@ function Dashboard() {
           </ResponsiveCard>
 
           <ResponsiveCard
-            style={[
-              { flex: layout.isDesktop ? 0.48 : 1 },
-              margin.bottom(2),
-            ]}
+            style={[{ flex: layout.isDesktop ? 0.48 : 1 }, margin.bottom(2)]}
           >
             <Card.Content>
               <ResponsiveText variant="title">Card 2</ResponsiveText>
@@ -364,5 +351,3 @@ function Dashboard() {
 4. **Combine utilities** for complex layouts
 5. **Test on multiple devices** to verify responsive behavior
 6. **Use TypeScript** for type safety with responsive values
-
-

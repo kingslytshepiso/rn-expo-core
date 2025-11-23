@@ -33,7 +33,7 @@ export const LayoutTracker: React.FC<LayoutTrackerProps> = ({ children }) => {
       "change",
       ({ window }: { window: ScaledSize }) => {
         setDimensions({ width: window.width, height: window.height });
-      }
+      },
     );
 
     return () => subscription?.remove();

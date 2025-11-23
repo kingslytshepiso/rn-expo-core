@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Initial project setup with Expo and TypeScript
 - React Native Paper integration for theming
 - Layout tracking utilities for responsive design
@@ -16,5 +17,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Unit testing setup with Jest and React Native Testing Library
 - ESLint configuration using Expo's default rules
 - Changelog tracking system
-
-

@@ -68,9 +68,7 @@ export default function HomeScreen() {
       style={{ backgroundColor: theme.colors.background }}
       contentContainerStyle={[flex, padding(getSpacing(4))]}
     >
-      <ResponsiveContainer
-        maxWidth={layout.isDesktop ? 1200 : undefined}
-      >
+      <ResponsiveContainer maxWidth={layout.isDesktop ? 1200 : undefined}>
         <ResponsiveCard
           padding={layout.isDesktop ? 24 : 16}
           margin={layout.isDesktop ? 16 : 8}
@@ -84,17 +82,17 @@ export default function HomeScreen() {
           >
             Welcome
           </ResponsiveText>
-          
+
           <ResponsiveText
             variant="bodyMedium"
-            style={{ 
-              color: theme.colors.text, 
-              marginTop: getSpacing(2) 
+            style={{
+              color: theme.colors.text,
+              marginTop: getSpacing(2),
             }}
           >
             Breakpoint: {layout.breakpoint}
           </ResponsiveText>
-          
+
           <ResponsiveText
             variant="bodyMedium"
             style={{ color: theme.colors.text }}
@@ -144,7 +142,7 @@ function MyComponent() {
         md: 24,
         lg: 32,
       }),
-      layout.width
+      layout.width,
     ),
     maxWidth: layout.isDesktop ? 1200 : "100%",
   };
@@ -193,7 +191,7 @@ import { useTheme } from "rn-expo-core";
 
 function ThemedButton() {
   const theme = useTheme();
-  
+
   return (
     <TouchableOpacity
       style={{
@@ -202,9 +200,7 @@ function ThemedButton() {
         borderRadius: 8,
       }}
     >
-      <Text style={{ color: theme.colors.onPrimary }}>
-        Button
-      </Text>
+      <Text style={{ color: theme.colors.onPrimary }}>Button</Text>
     </TouchableOpacity>
   );
 }
@@ -260,7 +256,7 @@ function AdaptiveComponent() {
       lg: 20,
       xl: 24,
     }),
-    layout.width
+    layout.width,
   );
 
   return <Text style={{ fontSize }}>Adaptive Text</Text>;
@@ -309,4 +305,3 @@ npm install --save-dev @types/react @types/react-native typescript
 - Read the [Usage Guide](./docs/USAGE_GUIDE.md) for detailed API documentation
 - Check the [Project Structure](./PROJECT_STRUCTURE.md) to understand the package organization
 - See the demo app in this repository for more examples
-

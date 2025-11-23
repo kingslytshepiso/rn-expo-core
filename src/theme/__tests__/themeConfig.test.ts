@@ -19,4 +19,3 @@ describe("Theme Configuration", () => {
     expect(darkTheme.fonts.titleLarge).toBeDefined();
   });
 });
-

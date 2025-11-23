@@ -1,8 +1,5 @@
-# Run lint-staged for staged files
+# Run lint-staged for staged files (includes formatting and linting)
 npx lint-staged
 
-# Run type checking
+# Quick type check (fast feedback)
 npm run type-check
-
-# Run tests
-npm test

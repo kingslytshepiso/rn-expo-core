@@ -50,13 +50,14 @@ jobs:
       - name: Combine documentation and web app
         run: |
           mkdir -p docs/combined
-          # Copy Expo web build to demo subdirectory
-          mkdir -p docs/combined/demo
-          cp -r web-build/* docs/combined/demo/ || true
+          # Copy Expo web build to root (so asset paths work correctly)
+          cp -r web-build/* docs/combined/ || true
           # Create api subdirectory for TypeDoc documentation
           mkdir -p docs/combined/api
           cp -r docs/api/* docs/combined/api/ || true
-          # Create landing page at root
+          # Backup Expo's index.html and create a landing page
+          mv docs/combined/index.html docs/combined/app.html || true
+          # Create landing page at root that links to app and API docs
           cat > docs/combined/index.html << 'EOF'
           <!DOCTYPE html>
           <html lang="en">
@@ -138,10 +139,10 @@ jobs:
               <h1>rn-expo-core</h1>
               <p class="subtitle">A reusable component utility package for cross-platform React Native Expo projects</p>
               <div class="links">
-                <a href="./demo/" class="link-card">
+                <a href="./app.html" class="link-card">
                   <span class="emoji">📱</span>
-                  <h2>Demo App</h2>
-                  <p>Interactive demo application showcasing components, theming, and responsive design features</p>
+                  <h2>Interactive Demo</h2>
+                  <p>Try out components, theming, and responsive design features in a live demo application</p>
                 </a>
                 <a href="./api/" class="link-card">
                   <span class="emoji">📚</span>

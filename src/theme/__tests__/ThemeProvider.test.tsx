@@ -1,10 +1,10 @@
-import React from "react";
-import { Text } from "react-native";
 import { render } from "@testing-library/react-native";
+import React from "react";
+import { Platform, Text } from "react-native";
+import { MD3LightTheme } from "react-native-paper";
+import { darkTheme, lightTheme } from "../themeConfig";
 import { ThemeProvider } from "../ThemeProvider";
 import { useTheme } from "../useTheme";
-import { lightTheme, darkTheme } from "../themeConfig";
-import { MD3LightTheme } from "react-native-paper";
 
 // Mock useColorScheme - we'll use jest.spyOn after imports
 let mockUseColorScheme: jest.SpyInstance;
@@ -24,6 +24,14 @@ describe("ThemeProvider", () => {
       mockUseColorScheme = jest.spyOn(RN, "useColorScheme");
     }
     mockUseColorScheme.mockReturnValue("light");
+  });
+
+  afterEach(() => {
+    if (typeof document === "undefined") return;
+    const styleElement = document.getElementById("rn-expo-core-scrollbar");
+    if (styleElement && styleElement.parentElement) {
+      styleElement.remove();
+    }
   });
 
   it("should provide light theme when theme='light'", () => {
@@ -132,5 +140,62 @@ describe("ThemeProvider", () => {
       </ThemeProvider>,
     );
     expect(toJSON()).toMatchSnapshot();
+  });
+
+  it("applies global scrollbar styles on web", () => {
+    const originalOS = Platform.OS;
+    const originalDocument = globalThis.document;
+    const elements = new Map<string, HTMLStyleElement>();
+    const mockHead = {
+      appendChild: (element: HTMLStyleElement) => {
+        if (element.id) {
+          elements.set(element.id, element);
+        }
+      },
+    } as unknown as HTMLElement;
+    const documentMock = {
+      head: mockHead,
+      getElementById: (id: string) => elements.get(id) ?? null,
+      createElement: () => {
+        const element = {
+          id: "",
+          textContent: "",
+          remove() {
+            if (this.id) {
+              elements.delete(this.id);
+            }
+          },
+        } as HTMLStyleElement;
+        Object.defineProperty(element, "parentElement", {
+          configurable: true,
+          get: () => mockHead,
+        });
+        return element;
+      },
+    } as unknown as Document;
+
+    globalThis.document = documentMock;
+
+    Object.defineProperty(Platform, "OS", {
+      configurable: true,
+      get: () => "web",
+    });
+
+    render(
+      <ThemeProvider theme="light">
+        <Text>Scrollbar Test</Text>
+      </ThemeProvider>,
+    );
+
+    const styleElement = document.getElementById("rn-expo-core-scrollbar");
+    expect(styleElement).not.toBeNull();
+    expect(styleElement?.textContent).toContain("::-webkit-scrollbar");
+    expect(styleElement?.textContent).toContain(lightTheme.colors.primary);
+
+    Object.defineProperty(Platform, "OS", {
+      configurable: true,
+      get: () => originalOS,
+    });
+    globalThis.document = originalDocument;
   });
 });

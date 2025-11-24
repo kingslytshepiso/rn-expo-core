@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { LayoutTracker, LayoutTrackerProps } from "./layout";
 import { ThemeProvider, ThemeProviderProps } from "./theme";
+import { SnackbarProvider } from "./components";
 
 /**
  * Combined provider props that includes all required providers
@@ -51,7 +52,11 @@ export const AppProviders: React.FC<AppProvidersProps> = ({
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <LayoutTracker debounceMs={layoutDebounceMs}>{children}</LayoutTracker>
+        <SnackbarProvider>
+          <LayoutTracker debounceMs={layoutDebounceMs}>
+            {children}
+          </LayoutTracker>
+        </SnackbarProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );

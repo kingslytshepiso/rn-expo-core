@@ -57,6 +57,17 @@ jobs:
           cp -r docs/api/* docs/combined/api/ || true
           # Backup Expo's index.html and create a landing page
           mv docs/combined/index.html docs/combined/app.html || true
+          # Rewrite absolute asset references so GitHub Pages subpaths work
+          node <<'EOF'
+          const fs = require('fs');
+          const path = 'docs/combined/app.html';
+          if (fs.existsSync(path)) {
+            let html = fs.readFileSync(path, 'utf8');
+            html = html.replace(/href="\//g, 'href="./');
+            html = html.replace(/src="\//g, 'src="./');
+            fs.writeFileSync(path, html);
+          }
+          EOF
           # Create landing page at root that links to app and API docs
           cat > docs/combined/index.html << 'EOF'
           <!DOCTYPE html>

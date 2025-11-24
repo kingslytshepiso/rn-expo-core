@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Card, Divider, Paragraph, Title } from "react-native-paper";
+import { Button, Card, Paragraph, Title } from "react-native-paper";
 import { CodeBlock } from "./CodeBlock";
 import {
   ResponsiveCard,
@@ -12,6 +12,7 @@ import {
   margin,
   padding,
   useTheme,
+  useSnackbar,
 } from "../src";
 
 type Page =
@@ -31,6 +32,7 @@ export const ComponentsScreen: React.FC<ComponentsScreenProps> = ({
 }) => {
   const theme = useTheme();
   const layout = useLayout();
+  const { showSnackbar } = useSnackbar();
 
   return (
     <ScrollView
@@ -123,6 +125,55 @@ export const ComponentsScreen: React.FC<ComponentsScreenProps> = ({
   </Card.Content>
 </ResponsiveCard>`}
             </CodeBlock>
+          </Card.Content>
+        </ResponsiveCard>
+
+        {/* Snackbar Provider */}
+        <ResponsiveCard margin={layout.isDesktop ? 16 : 12}>
+          <Card.Content>
+            <Title>SnackbarProvider & useSnackbar</Title>
+            <Paragraph style={margin.top(2)}>
+              Provide global feedback messages that blend with your current
+              theme. AppProviders already includes this, or you can wire it up
+              manually.
+            </Paragraph>
+            <CodeBlock>
+              {`import { SnackbarProvider, useSnackbar } from 'rn-expo-core';
+
+const Example = () => {
+  const { showSnackbar } = useSnackbar();
+  return (
+    <Button onPress={() => showSnackbar({ message: 'Saved!' })}>
+      Show snackbar
+    </Button>
+  );
+};
+
+export function App() {
+  return (
+    <SnackbarProvider>
+      <Example />
+    </SnackbarProvider>
+  );
+}`}
+            </CodeBlock>
+            <Button
+              mode="contained-tonal"
+              style={margin.top(3)}
+              onPress={() =>
+                showSnackbar({
+                  message: "This is a global snackbar from rn-expo-core",
+                  actionLabel: "Undo",
+                  onActionPress: () =>
+                    showSnackbar({
+                      message: "Undo clicked",
+                      duration: 1500,
+                    }),
+                })
+              }
+            >
+              Trigger Snackbar
+            </Button>
           </Card.Content>
         </ResponsiveCard>
       </ResponsiveContainer>

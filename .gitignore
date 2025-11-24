@@ -49,6 +49,7 @@ coverage/
 docs/api/
 web-build/
 docs/combined/
+docs/local-preview/
 
 # Husky
 .husky/_/

@@ -8,6 +8,7 @@ A reusable component utility package for cross-platform React Native Expo projec
 - 📱 **Responsive Design**: Real-time layout tracking for mobile, tablet, and desktop
 - 🎯 **Layout Utilities**: Reusable styling classes and utilities
 - 🧩 **Reusable Components**: Pre-built responsive components
+- 🔔 **Global Feedback**: Snackbar provider + hook for consistent toasts
 - ✅ **Testing**: Unit tests for utilities and components
 - 🔍 **Linting**: ESLint configuration using Expo's default rules
 - 📝 **Changelog**: Automatic tracking of updates and changes
@@ -80,13 +81,15 @@ For more control, you can use providers individually:
 
 ```tsx
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ThemeProvider, LayoutTracker } from "rn-expo-core";
+import { ThemeProvider, LayoutTracker, SnackbarProvider } from "rn-expo-core";
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme="auto">
-        <LayoutTracker>{/* Your app content */}</LayoutTracker>
+        <SnackbarProvider>
+          <LayoutTracker>{/* Your app content */}</LayoutTracker>
+        </SnackbarProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );
@@ -201,6 +204,39 @@ function MyScreen() {
         </Card.Content>
       </ResponsiveCard>
     </ResponsiveContainer>
+  );
+}
+```
+
+### Global Snackbars
+
+Use the built-in provider and hook to trigger themed snackbars anywhere in your app:
+
+```tsx
+import { SnackbarProvider, useSnackbar } from "rn-expo-core";
+
+const SaveButton = () => {
+  const { showSnackbar } = useSnackbar();
+  return (
+    <Button
+      onPress={() =>
+        showSnackbar({
+          message: "Saved! 🎉",
+          actionLabel: "Undo",
+          onActionPress: handleUndo,
+        })
+      }
+    >
+      Save
+    </Button>
+  );
+};
+
+export default function App() {
+  return (
+    <SnackbarProvider>
+      <SaveButton />
+    </SnackbarProvider>
   );
 }
 ```
